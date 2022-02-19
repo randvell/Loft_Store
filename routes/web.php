@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+require __DIR__ . '/auth.php';
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', \App\Http\Controllers\HomeController::class . '@index')->name('home');
+Route::get('/home', \App\Http\Controllers\HomeController::class . '@index')->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/category/{category}', \App\Http\Controllers\CategoryController::class . '@show')->name('category');
 
-require __DIR__.'/auth.php';
+Route::get('/product/{product}', \App\Http\Controllers\ProductController::class . '@show')->name('product');
+
+// todo: админские роуты
