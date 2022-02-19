@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int $id
  * @property string $name
  * @property string $description
+ * @property-read Product[] $products
  */
 class Category extends Model
 {
@@ -33,12 +34,10 @@ class Category extends Model
     }
 
     /**
-     * @return Collection
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public static function getList(): Collection
+    public function products()
     {
-        return self::query()
-            ->orderBy('id', 'DESC')
-            ->get();
+        return $this->hasMany(Product::class);
     }
 }

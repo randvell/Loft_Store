@@ -23,7 +23,9 @@
                 <div class="slider"><img src="/public/img/slider.png" alt="Image" class="image-main"></div>
             </div>
             @yield('content')
-            <div class="content-bottom"></div>
+            <div class="content-bottom">
+                @yield('content.bottom')
+            </div>
         </div>
     </div>
 </div>

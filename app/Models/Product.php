@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $price
  * @property string $image
  * @property string $description
+ * @property-read Category $category
  */
 class Product extends Model
 {
@@ -27,7 +28,7 @@ class Product extends Model
     /**
      * @return Model|null
      */
-    public static function getRandomProduct(): ?Model
+    public static function getRandomProduct(): ?self
     {
         return self::query()
             ->orderByRaw('RAND()')
@@ -42,5 +43,29 @@ class Product extends Model
         return self::query()
             ->orderBy('id', 'DESC')
             ->get();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * @return Category
+     */
+    public function getCategory(): Category
+    {
+        return Category::query()->find($this->category_id);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategoryName()
+    {
+        return $this->getCategory()->name;
     }
 }

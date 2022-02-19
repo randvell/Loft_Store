@@ -19,6 +19,6 @@ Route::get('/home', \App\Http\Controllers\HomeController::class . '@index')->nam
 
 Route::get('/category/{category}', \App\Http\Controllers\CategoryController::class . '@show')->name('category');
 
-Route::get('/product/{product}', \App\Http\Controllers\ProductController::class . '@show')->name('product');
+Route::get('/product/{id}', \App\Http\Controllers\ProductController::class . '@show')->name('product');
 
 // todo: админские роуты
