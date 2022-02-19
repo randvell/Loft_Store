@@ -33,4 +33,7 @@
             @endforeach
         </div>
     </div>
+    <div class="content-footer__container">
+        {{ $products->links() }}
+    </div>
 @endsection

@@ -20,10 +20,11 @@ class ProductController extends Controller
      */
     public function show(int $id)
     {
+        /** @var Product $product */
         $product = Product::query()
             ->with('category')
             ->find($id);
 
-        return view('product', ['product' => $product]);
+        return view('product', ['product' => $product, 'products' => $product->category->getProducts(3)]);
     }
 }

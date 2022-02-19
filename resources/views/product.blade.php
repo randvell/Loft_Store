@@ -46,7 +46,7 @@
     </div>
     <div class="content-main__container">
         <div class="products-columns">
-            @foreach($product->category->getProducts() as $product)
+            @foreach($products as $product)
                 <div class="products-columns__item">
                     <div class="products-columns__item__title-product"><a href="{{ route('product', $product) }}" class="products-columns__item__title-product__link">{{ $product->name }}</a></div>
                     <div class="products-columns__item__thumbnail"><a href="{{ route('product', $product) }}" class="products-columns__item__thumbnail__link"><img src="/public/img/cover/{{ $product->image }}" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>

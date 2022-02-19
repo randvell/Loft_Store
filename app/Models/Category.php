@@ -23,14 +23,21 @@ class Category extends Model
     protected $fillable = ['name', 'description'];
 
     /**
+     * @param int|null $limit
+     *
      * @return Collection
      */
-    public function getProducts(): Collection
+    public function getProducts(?int $limit): Collection
     {
-        return Product::query()
+        $products = Product::query()
             ->orderBy('id', 'DESC')
-            ->where('category_id', '=', $this->id)
-            ->get();
+            ->where('category_id', '=', $this->id);
+
+        if ($limit) {
+            $products->limit($limit);
+        }
+
+        return $products->get();
     }
 
     /**

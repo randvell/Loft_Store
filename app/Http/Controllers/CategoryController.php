@@ -15,15 +15,21 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Category $category
+     * @param int $id
      *
      * @return View
      */
-    public function show(Category $category)
+    public function show(int $id)
     {
+        /** @var Category $category */
+        $products = Product::query()
+            ->where('category_id', '=', $id)
+            ->paginate(6);
+
         return view('home', [
-            'currentCategory' => $category,
-            'products' => $category->getProducts()
+            'products' => $products,
+            'categories' => Category::all(),
+            'currentCategory' => Category::find($id)
         ]);
     }
 }
