@@ -21,12 +21,12 @@ Route::get('/home', \App\Http\Controllers\HomeController::class . '@index')->nam
 Route::get('/category/{category}', \App\Http\Controllers\CategoryController::class . '@show')->name('category');
 
 Route::get('/product/{id}', \App\Http\Controllers\ProductController::class . '@show')->name('product');
-Route::post('/product/buy', \App\Http\Controllers\ProductController::class . '@buy')->name('product.buy');
+//Route::post('/product/buy', \App\Http\Controllers\ProductController::class . '@buy')->name('product.buy');
 
-//Route::post('/product/buy', function (Request $request) {
-//    (new \App\Http\Controllers\ProductController())->buy($request);
-//    return \Illuminate\Support\Facades\Redirect::to(route('orders'));
-//})->name('product.buy');
+Route::post('/product/buy', function (Request $request) {
+    (new \App\Http\Controllers\ProductController())->buy($request);
+    return \Illuminate\Support\Facades\Redirect::to(route('orders'));
+})->name('product.buy');
 
 Route::get('/orders', \App\Http\Controllers\OrderController::class . '@index')->name('orders');
 Route::get('/order/{id}', \App\Http\Controllers\OrderController::class . '@show')->name('order');

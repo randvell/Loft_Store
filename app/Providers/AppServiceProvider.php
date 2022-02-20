@@ -26,10 +26,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer('layouts.sidebar.categories', function (\Illuminate\View\View $view) {
+            return $view
+                ->with('categories', Category::all());
+        });
+
         View::composer('*', function (\Illuminate\View\View $view) {
             return $view
-                ->with('randomProduct', Product::getRandomProduct())
-                ->with('categories', Category::all());
+                ->with('randomProduct', Product::getRandomProduct());
         });
     }
 }

@@ -13,11 +13,6 @@
         });
 
         $('#buy_from_btn').click(function () {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': {{ csrf_token() }}
-                }
-            });
             $.ajax({
                 type: 'POST',
                 data: $("#buy_form").serialize(),

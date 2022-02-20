@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewOrderCreated;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
@@ -38,10 +39,13 @@ class ProductController extends Controller
         $email = $request->input('email');
         $name = $request->input('customer_name');
 
-        (new Order([
+        $order = new Order([
             'product_id' => $id,
             'customer_name' => $name,
             'email' => $email
-        ]))->save();
+        ]);
+
+        $order->save();
+        NewOrderCreated::dispatch($order);
     }
 }
