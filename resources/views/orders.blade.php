@@ -16,15 +16,16 @@
             </div>
         </div>
         <div class="content-main__container">
-            @foreach($orders as $order)
-                <div class="cart-product-list">
+            <div class="cart-product-list">
+                @foreach($orders as $order)
                     <div class="cart-product-list__item">
                         <div class="cart-product__item__product-photo"><img
                                 src="/public/img/cover/{{ $order->product->image }}"
                                 class="cart-product__item__product-photo__image">
                         </div>
                         <div class="cart-product__item__product-name">
-                            <div class="cart-product__item__product-name__content"><a href="#">{{ $order->product->name }}</a></div>
+                            <div class="cart-product__item__product-name__content"><a
+                                    href="#">{{ $order->product->name }}</a></div>
                         </div>
                         <div class="cart-product__item__cart-date">
                             <div class="cart-product__item__cart-date__content">{{ $order->created_at }}</div>
@@ -33,11 +34,10 @@
                                 class="product-price__value">{{ $order->product->price }} рублей</span>
                         </div>
                     </div>
-                    @endforeach
-                </div>
-                <div class="content-footer__container">
-                     {{ $orders->links() }}
-                </div>
+                @endforeach
+            </div>
+            <div class="content-footer__container">
+                {{ $orders->links() }}
+            </div>
         </div>
-    </div>
 @endsection

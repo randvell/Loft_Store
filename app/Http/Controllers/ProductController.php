@@ -38,6 +38,9 @@ class ProductController extends Controller
         $id = $request->input('product_id');
         $email = $request->input('email');
         $name = $request->input('customer_name');
+        if (!$id || !$email || !$name) {
+            throw new \InvalidArgumentException('Переданы не все обязательные поля');
+        }
 
         $order = new Order([
             'product_id' => $id,
@@ -47,5 +50,7 @@ class ProductController extends Controller
 
         $order->save();
         NewOrderCreated::dispatch($order);
+
+        return redirect(route('orders'));
     }
 }

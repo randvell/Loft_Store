@@ -11,14 +11,6 @@
             $('.popup-bg').fadeOut(800);
             $('html').removeClass('no-scroll');
         });
-
-        $('#buy_from_btn').click(function () {
-            $.ajax({
-                type: 'POST',
-                data: $("#buy_form").serialize(),
-                url: "{{ route('product.buy') }}",
-            })
-        });
     });
 </script>
 
@@ -26,7 +18,8 @@
     <div class="popup">
         <button id="popup_close_btn" style="float: right;">X</button>
         <h2>Форма покупки товара</h2>
-        <form id="buy_form" action="#" method="post">
+        <form id="buy_form" action="{{ route('product.buy') }}" method="post">
+            @csrf
             Name:<br>
             @if (Auth::user())
                 <input type="text" name="customer_name" value="{{ Auth::user()->name }}">
@@ -41,7 +34,6 @@
                 <input type="text" name="email">
             @endif
             <input id="buy_product_id" name="product_id" type="hidden">
-            {{ csrf_field() }}
             <br><br>
             <input id="buy_from_btn" type="submit" value="Submit">
         </form>
