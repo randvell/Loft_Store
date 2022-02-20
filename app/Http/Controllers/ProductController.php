@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
@@ -26,5 +27,21 @@ class ProductController extends Controller
             ->find($id);
 
         return view('product', ['product' => $product, 'products' => $product->category->getProducts(3)]);
+    }
+
+    /**
+     *
+     */
+    public function buy(Request $request)
+    {
+        $id = $request->input('product_id');
+        $email = $request->input('email');
+        $name = $request->input('customer_name');
+
+        (new Order([
+            'product_id' => $id,
+            'customer_name' => $name,
+            'email' => $email
+        ]))->save();
     }
 }
